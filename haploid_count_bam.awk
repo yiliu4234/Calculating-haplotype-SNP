@@ -15,22 +15,22 @@ NR != FNR{
 		if($3 != tmp_chr){
 			idx_hap = 1
 			tmp_chr = $3
-            hap = map[$3":"idx_hap]
+                        hap = map[$3":"idx_hap]
 			split(hap,array,":")
 			pos1 = array[1]
 			pos2 = array[2]
 			}
 		seqname = $1
 		cigar = $6
-        pos = $4
-	    frag_len = $9 > 0 ? $9:-$9
+                pos = $4
+	        frag_len = $9 > 0 ? $9:-$9
 		raw_seq =$10
 		if (pos <= pos1 && pos + frag_len > pos2 && cigar != "*" || frag_map[seqname]){
 			seq = ""
 			mv_seq = 1
 			mv_cigar = 1
-            while(mv_cigar -1 < length(cigar)){
-				cigar = substr(cigar,mv_cigar)
+                 while(mv_cigar -1 < length(cigar)){
+			    cigar = substr(cigar,mv_cigar)
 			    raw_seq = substr(raw_seq,mv_seq)
 			    match(cigar,pattern,cig_inf)
 			    if (cig_inf[2] == "M"){
@@ -50,7 +50,7 @@ NR != FNR{
 					seq = seq""del
 					}
            	    mv_cigar = cig_inf[0,"length"]+1
-			    }
+		           }
 			seq_true_len = length(seq)
 			if (pos + seq_true_len -1 >= pos2 || frag_map[seqname]){
 		        if(!frag_map[seqname]){
@@ -78,8 +78,8 @@ NR != FNR{
 		}
 		else if(pos > pos1){
 			idx_hap++
-            if(map[$3":"idx_hap]){
-                hap = map[$3":"idx_hap]
+                       if(map[$3":"idx_hap]){
+                            hap = map[$3":"idx_hap]
 			    split(hap,array,":")
 			    pos1 = array[1]
 			    pos2 = array[2]
