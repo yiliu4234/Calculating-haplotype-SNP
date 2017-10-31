@@ -16,7 +16,8 @@ FS="\t";OFS="\t"}{
 pos[$1","$2","$3]+=$6;haploid[$1","$2","$3","$4","$5","$6]=1}
 END{
 for(hap in haploid){
-    split(hap,array,",");if(array[6]/pos[array[1]","array[2]","array[3]] > 0.3)print array[1],array[2],array[3],array[4],array[5],array[6],array[6]/pos[array[1]","array[2]","array[3]]}
+    split(hap,array,",");if(array[6]/pos[array[1]","array[2]","array[3]] > 0.3)print array[1],array[2],array[3],array[4],array[5],array[6],array[6]/pos[array[1]","array[2]","array[3]]
+}
 }' | sort -k1,1 -k2,2n > $haploid_file
 
 
