@@ -9,9 +9,9 @@ sortbamfile="/home/ywliao/project/company/Haploid/test.bam" #input sorted bam fi
 haploid_pos="/home/ywliao/project/company/Haploid/haploid_pos.txt" #input haplotype position file: chr,position1,postion2;tab separated;should be sorted
 haploid_awk="/home/ywliao/project/company/Haploid/haploid_count_bam.awk" 
 haploid_file=$outdir"test"".haploid.txt" #output file 
-samtools view $sortbamfile | $haploid_awk $haploid_pos - | sort -k1,1 -k 2,2n > $haploid_file
+samtools view -F 0x100 $sortbamfile | $haploid_awk $haploid_pos - | sort -k1,1 -k 2,2n > $haploid_file
 #or filter haploid snp covered by less than 30% of reads
-samtools view $sortbamfile | $haploid_awk $haploid_pos - | awk 'BEGIN{
+samtools view -F 0x100 $sortbamfile | $haploid_awk $haploid_pos - | awk 'BEGIN{
 FS="\t";OFS="\t"}{
 pos[$1","$2","$3]+=$6;haploid[$1","$2","$3","$4","$5","$6]=1}
 END{
